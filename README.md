@@ -201,21 +201,56 @@
 - - - - -
 ### Решение:
 
+Создаем папку потому что для hostPath PV Kubernetes использует физический путь на ноде
+
+  - mkdir -p /home/vm/Templates/K8S/2.1/sc-data
+
+Создание StorageClass, PV и PVC
+
+  - StorageClass – задаёт правила для PVC и связывает его с PV вручную
+
+  - PersistentVolume (PV) – физическое хранилище на ноде
+
+  - PersistentVolumeClaim (PVC) – запрос Pod на использование этого PV
+
+Deployment с двумя контейнерами
+
+  - busybox-writer пишет дату каждые 5 секунд в файл /mnt/data/data.txt
+
+  - multitool-reader читает этот файл в реальном времени
+
+  - общий volume /mnt/data обеспечивается через PVC → PV → hostPath
+
+Применение манифеста
+
+  - kubectl apply -f sc.yaml
+
+Проверяем статус
+
+  - kubectl get pods
+
+  - kubectl get pvc
+
+  - kubectl get pv
+
+Проверяем обмен данными
+
+  - kubectl exec -it data-exchange-sc-6787845698-l6j87 -c multitool-reader -- tail -f /mnt/data/data.txt
+
+#### Пояснение задания
+
+1. Контейнеры обмениваются данными через PVC, который ссылается на PV, физически расположенный в hostPath на ноде
+
+2. StorageClass нужен для связи PVC и PV и управления политикой привязки
+
+3. Данные остаются на локальной ноде, даже если Pod удалён, благодаря Retain
 
 
+![8](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/8.png)
 
-### Что нужно выполнить:
+![9](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/9.png)
 
-
-
-
-
-
-![8](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/5.png)
-
-
-
-
+![10](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/10.png)
 
 - - - - -
 1. Deployment (containers-data-exchange.yaml)
