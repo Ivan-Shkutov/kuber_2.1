@@ -126,11 +126,50 @@
 1. объяснение наблюдаемого поведения ресурсов в двух последних шагах.
 
 - - - - -
+### Решение:
 
+Создаем папку потому что для hostPath PV Kubernetes использует физический путь на ноде
 
+  - mkdir -p /home/vm/Templates/K8S/2.1/k8s-data
 
+Применяем манифест
 
+  - kubectl apply -f pv-pvc.yaml
 
+Проверяем PV и PVC
+
+  - kubectl get pv
+
+  - kubectl get pvc
+
+Проверяем Pod
+
+  - kubectl get pods
+
+Проверяем обмен данными контейнером multitool-reader
+
+  - kubectl exec -it data-exchange-pvc-xxxxx -c multitool-reader -- tail -f /mnt/data/data.txt
+
+Удаляем Deployment и PVC
+
+  - kubectl delete deployment data-exchange-pvc
+    
+  - kubectl delete pvc local-pvc
+
+Проверяем PV
+
+  - kubectl describe pv local-pv
+
+Проверяем файл на диске
+
+  - ls -l /home/vm/Templates/K8S/2.1/k8s-data
+    
+
+![5](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/5.png)
+
+![6](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/6.png)
+
+![7](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/7.png)
 
 - - - - -
 ### Задание 3. StorageClass
@@ -160,7 +199,19 @@
 2. Шаблоны манифестов с учебными комментариями
 
 - - - - -
+### Решение:
 
+
+
+
+### Что нужно выполнить:
+
+
+
+
+
+
+![8](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/5.png)
 
 
 
