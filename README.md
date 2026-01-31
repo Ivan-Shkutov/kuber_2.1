@@ -83,13 +83,13 @@
 
   - tail -f /shared/data.txt
 
-![1]()
+![1](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/1.png)
 
-![2]()
+![2](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/2.png)
 
-![3]()
+![3](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/3.png)
 
-![4]()
+![4](https://github.com/Ivan-Shkutov/kuber_2.1/blob/main/4.png)
 
 - - - - -
 
